@@ -12,27 +12,12 @@ function onPlayTime(data) {
 
 player.on('timeupdate', throttle(onPlayTime, 1000));
 
+
 function initPage() {
-  const outputValue = JSON.parse(localStorage.getItem(LOCAL_STORAG));
-
-  if (outputValue === null) {
-    return;
-  }
-
-  const paused = outputValue['seconds'];
-  if (paused) {
-    player
-      .setCurrentTime(paused)
-      .then(function () {})
-      .catch(function (error) {
-        switch (error.name) {
-          case 'RangeError':
-            break;
-          default:
-            break;
-        }
-      });
+  const saveTime = localStorage.getItem(LOCAL_STORAG);
+  if (saveTime) {
+    const paused = JSON.parse(saveTime).seconds;
+    player.setCurrentTime(paused);
   }
 }
-
 initPage();

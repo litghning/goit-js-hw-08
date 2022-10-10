@@ -7,11 +7,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 console.log(galleryItems);
 const refs = document.querySelector('.gallery')
-const addGalleryMerkup = createGalleryMarkup(galleryItems);
-
-pushMarkupOnHtml();
-
-refs.addEventListener("click", onImageClick);
+const addGalleryMerkup = createGalleryMarkup(galleryItems); 
 
 function createGalleryMarkup(elements) {
     return elements
@@ -29,20 +25,9 @@ function createGalleryMarkup(elements) {
         )
         .join("");
 }
+refs.insertAdjacentHTML('beforeend', addGalleryMerkup);
 
-function onImageClick(evt) {
-    evt.preventDefault();
-    if (evt.target.nodeName !== "IMG")
-    { return; }
-}
-onOpenModalWindow();
-function onOpenModalWindow() {
-  return new SimpleLightbox('.gallery a', {
+   const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
   });
-}
-
-function pushMarkupOnHtml() {
-  refs.insertAdjacentHTML('beforeend', addGalleryMerkup);
-}
